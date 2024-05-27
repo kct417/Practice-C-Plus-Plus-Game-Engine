@@ -66,6 +66,9 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+# Premake
+!/vendor/bin/Premake/premake5.exe
+
 # Compilation files
 /bin
 /build

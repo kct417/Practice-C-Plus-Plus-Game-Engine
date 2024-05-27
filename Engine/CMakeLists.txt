@@ -27,6 +27,7 @@ if(NOT TARGET Engine)
     set(SOURCE_FILES
 
         src/Engine/src/Application.cpp
+        src/Engine/src/Log.cpp
 
     )
 
@@ -40,14 +41,14 @@ if(NOT TARGET Engine)
     # Dependency CMakeLists.txt Locations
     set(SUB_PROJECTS
 
-
+        vendor/spdlog
 
     )
 
     # Library Names
     set(LIB_NAMES
 
-
+        spdlog::spdlog
 
     )
 

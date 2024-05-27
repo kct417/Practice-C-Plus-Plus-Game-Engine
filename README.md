@@ -40,6 +40,13 @@ Code adapted from YouTube tutorials by The Cherno and sudocpp:
     1.  Run `cmake -B build`
     2.  Run `cmake --build build`
 
+### Premake
+
+-   command-line
+
+    1.  Run `GenerateProjects.bat`
+    2.  Run `make`
+
 Files (library files / executable files) will be stored in bin directory
 
 Intermediates (object files) will be stored in build directory
@@ -50,3 +57,11 @@ Intermediates (object files) will be stored in build directory
     -   Remove all files not under source control
 -   `git clean -dfxn`
     -   Check what files `git clean -dfx` would remove
+-   Run `CleanProjects.bat`
+    -   Run `vendor\bin\Premake\premake5.exe clean`
+-   `vendor\bin\Premake\premake5.exe clean`
+    -   Remove all Makefiles and root bin/build directories
+-   `vendor\bin\Premake\premake5.exe clean-build`
+    -   Remove root bin/build directories
+-   `vendor\bin\Premake\premake5.exe clean-make`
+    -   Remove all Makefiles files

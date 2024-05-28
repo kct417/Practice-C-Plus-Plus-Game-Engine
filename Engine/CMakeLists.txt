@@ -26,15 +26,15 @@ if(NOT TARGET Engine)
     # Source Files
     set(SOURCE_FILES
 
-        src/Engine/src/Application.cpp
-        src/Engine/src/Log.cpp
+        src/Engine/src/Core/Application.cpp
+        src/Engine/src/Core/Log.cpp
 
     )
 
     # Header Directories
     set(INCLUDE_DIRS
 
-        src
+        src/Engine/include
 
     )
 
@@ -55,7 +55,7 @@ if(NOT TARGET Engine)
     # Compile Library
     message(STATUS "Compiling source files '${SOURCE_FILES}' in '${PROJECT_NAME}'")
     add_library(${PROJECT_NAME} ${PROJECT_TYPE} ${SOURCE_FILES})
-    target_include_directories(${PROJECT_NAME} PUBLIC src)
+    target_precompile_headers(${PROJECT_NAME} PRIVATE src/Engine/include/gepch.h)
 
     # Set Compile Flags
     if(WIN32)
@@ -72,7 +72,7 @@ if(NOT TARGET Engine)
 
     # Include Directories
     message(STATUS "Including directories '${INCLUDE_DIRS}' in '${PROJECT_NAME}'")
-    target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIRS})
+    target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIRS})
 
     # Add Dependencies
     foreach(PROJECT IN LISTS SUB_PROJECTS)

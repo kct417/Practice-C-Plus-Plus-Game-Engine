@@ -20,20 +20,14 @@ Code adapted from YouTube tutorials by The Cherno and sudocpp:
 
 ### CMake
 
--   VSCode
+-   VSCode `CMake Tools: Build`
 
-    1. Install extension `CMake Tools`
-    2. Press `Ctrl + Shift + P`
-    3. Select `CMake: Configure` OR `CMake: Build Target`
-        - Choose `CMake: Configure` to configure and build in separate steps
-        - Choose `CMake: Build Target` to configure and build in single step
-        - `CMake: Configure`
-            - command-line
-                - Run `cmake --build build`
-            - `CMake: Build Target`
-                - Select build target
-        - `CMake: Build Target`
-            - Select build target
+    1.  Install extension `CMake Tools`
+    2.  Press `Ctrl + Shift + P`
+    3.  Select `CMake: Build Target`
+        -   If no targets (choose one)
+            -   Select `CMake: Configure`
+            -   Type desired target
 
 -   command-line
 
@@ -42,14 +36,21 @@ Code adapted from YouTube tutorials by The Cherno and sudocpp:
 
 ### Premake
 
--   command-line
+-   Windows `Batch file`
 
     1.  Run `GenerateProjects.bat`
     2.  Run `make`
 
-Files (library files / executable files) will be stored in bin directory
+-   command-line
 
-Intermediates (object files) will be stored in build directory
+    1.  Run `vendor\bin\Premake\premake5.exe <build type>`
+    2.  Run `make`
+
+#### You may need to rerun commands or reload your window if your system does not recognize newly created files
+
+#### Files (libraries / executable files) will be stored in bin directory
+
+#### Intermediates (object files) will be stored in build directory
 
 ### Helpful Commands
 
@@ -58,10 +59,6 @@ Intermediates (object files) will be stored in build directory
 -   `git clean -dfxn`
     -   Check what files `git clean -dfx` would remove
 -   Run `CleanProjects.bat`
-    -   Run `vendor\bin\Premake\premake5.exe clean`
--   `vendor\bin\Premake\premake5.exe clean`
-    -   Remove all Makefiles and root bin/build directories
--   `vendor\bin\Premake\premake5.exe clean-build`
-    -   Remove root bin/build directories
--   `vendor\bin\Premake\premake5.exe clean-make`
-    -   Remove all Makefiles files
+    -   Remove all Makefiles and root `bin` / `bin-build` / `build` directories
+-   Check `premake5.lua` in root directory for more premake commands
+-   Check `tasks.json` and `launch.json` in `.vscode` directory for more tasks

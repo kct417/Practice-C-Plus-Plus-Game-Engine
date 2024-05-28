@@ -11,8 +11,8 @@ workspace "Engine"
     outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 include "Engine/premake5.lua"
-include "Game-1/premake5.lua"
-include "Game-2/premake5.lua"
+include "Sandbox/premake5.lua"
+-- include "Game-2/premake5.lua"
 
 -- Run `vendor\bin\premake\premake5.exe clean`
 newaction {
@@ -21,6 +21,7 @@ newaction {
     execute = function()
         print("Cleaning Projects...")
         os.execute("rmdir /s /q bin")
+        os.execute("rmdir /s /q bin-build")
         os.execute("rmdir /s /q build")
         os.execute("del /s /q Makefile")
         print("Done.")
@@ -34,6 +35,7 @@ newaction {
     execute = function()
         print("Cleaning Bin and Build Directories...")
         os.execute("rmdir /s /q bin")
+        os.execute("rmdir /s /q bin-build")
         os.execute("rmdir /s /q build")
         print("Done.")
     end

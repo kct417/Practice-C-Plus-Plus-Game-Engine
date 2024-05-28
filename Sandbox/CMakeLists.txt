@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.22)
-project(Game-1)
+project(Sandbox)
 
 set(ENGINE_DIR ../Engine/)
 
 # Source Files
 set(SOURCE_FILES
 
-    src/Game.cpp
+    src/Sandbox.cpp
 
 )
 

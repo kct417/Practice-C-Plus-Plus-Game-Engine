@@ -39,5 +39,5 @@ add_compile_options(
 )
 
 # Compile Projects
-add_subdirectory(Game-1)
-add_subdirectory(Game-2)
+add_subdirectory(Sandbox)
+# add_subdirectory(Game-2)

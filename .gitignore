@@ -71,4 +71,5 @@ _deps
 
 # Compilation files
 /bin
+/bin-build
 /build

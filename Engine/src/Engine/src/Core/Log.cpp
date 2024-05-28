@@ -1,6 +1,8 @@
+#include "gepch.h"
+
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-#include "Engine/include/Log.h"
+#include "Core/Log.h"
 
 namespace Engine
 {

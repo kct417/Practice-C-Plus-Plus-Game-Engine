@@ -1,10 +1,12 @@
 project "Engine"
-    location (_SCRIPT_DIR)
     kind "SharedLib"
     language "C++"
 
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("%{wks.location}/build/" .. outputdir .. "/%{prj.name}")
+    objdir ("%{wks.location}/bin-build/" .. outputdir .. "/%{prj.name}")
+
+    pchheader "gepch.h"
+    pchsource "%{wks.location}/%{prj.name}/src/Engine/src/gepch.cpp"
 
     files
     {
@@ -14,7 +16,7 @@ project "Engine"
 
     includedirs
     {
-        "%{wks.location}/%{prj.name}/src",
+        "%{wks.location}/%{prj.name}/src/Engine/include",
         "%{wks.location}/%{prj.name}/vendor/spdlog/include"
     }
     

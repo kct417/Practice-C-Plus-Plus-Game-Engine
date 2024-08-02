@@ -3,13 +3,16 @@
 	"tasks": [
 		{
 			"type": "process",
-			"label": "Premake: Generate Projects",
-			"command": "${workspaceFolder}/GenerateProjects.bat",
+			"label": "Premake: Generate Solution",
+			"command": "${workspaceFolder}/GenerateSolution.bat",
 			"group": "build",
-			"presentation": {
-				"close": true
-			},
-			"problemMatcher": [],
+			"detail": "Supports Windows PowerShell and Command Prompt"
+		},
+		{
+			"type": "process",
+			"label": "Premake: Generate Makefile",
+			"command": "${workspaceFolder}/GenerateMakefile.bat",
+			"group": "build",
 			"detail": "Supports Windows PowerShell and Command Prompt"
 		},
 		{
@@ -17,22 +20,60 @@
 			"label": "Premake: Clean Projects",
 			"command": "${workspaceFolder}/CleanProjects.bat",
 			"group": "build",
-			"presentation": {
-				"close": true
-			},
-			"problemMatcher": [],
 			"detail": "Supports Windows PowerShell and Command Prompt"
 		},
 		{
 			"type": "process",
-			"label": "Premake: Build Projects",
-			"command": "make",
-			"dependsOn": ["Premake: Generate Projects"],
+			"label": "MSVC Premake: Build Projects (Debug)",
+			"command": "msbuild",
+			"args": ["${workspaceFolder}", "/p:Configuration=Debug"],
+			"dependsOn": ["Premake: Generate Solution"],
 			"group": "build",
-			"presentation": {
-				"close": true
-			},
-			"problemMatcher": [],
+			"detail": "Supports Windows PowerShell and Command Prompt"
+		},
+		{
+			"type": "process",
+			"label": "MSVC Premake: Build Projects (Release)",
+			"command": "msbuild",
+			"args": ["${workspaceFolder}", "/p:Configuration=Release"],
+			"dependsOn": ["Premake: Generate Solution"],
+			"group": "build",
+			"detail": "Supports Windows PowerShell and Command Prompt"
+		},
+		{
+			"type": "process",
+			"label": "MSVC Premake: Build Projects (Dist)",
+			"command": "msbuild",
+			"args": ["${workspaceFolder}", "/p:Configuration=Dist"],
+			"dependsOn": ["Premake: Generate Solution"],
+			"group": "build",
+			"detail": "Supports Windows PowerShell and Command Prompt"
+		},
+		{
+			"type": "process",
+			"label": "GCC Premake: Build Projects (Debug)",
+			"command": "make",
+			"args": ["config=debug"],
+			"dependsOn": ["Premake: Generate Makefile"],
+			"group": "build",
+			"detail": "Supports Windows PowerShell and Command Prompt"
+		},
+		{
+			"type": "process",
+			"label": "GCC Premake: Build Projects (Release)",
+			"command": "make",
+			"args": ["config=release"],
+			"dependsOn": ["Premake: Generate Makefile"],
+			"group": "build",
+			"detail": "Supports Windows PowerShell and Command Prompt"
+		},
+		{
+			"type": "process",
+			"label": "GCC Premake: Build Projects (Dist)",
+			"command": "make",
+			"args": ["config=dist"],
+			"dependsOn": ["Premake: Generate Makefile"],
+			"group": "build",
 			"detail": "Supports Windows PowerShell and Command Prompt"
 		},
 		{
@@ -41,36 +82,13 @@
 			"command": "build",
 			"targets": ["all"],
 			"dependsOn": ["CMake: Configure"],
-			"group": "build",
-			"presentation": {
-				"close": true
-			},
-			"problemMatcher": [],
-			"detail": ""
-		},
-		{
-			"type": "cmake",
-			"label": "CMake: Build Engine",
-			"command": "build",
-			"targets": ["Engine"],
-			"dependsOn": ["CMake: Configure"],
-			"group": "build",
-			"presentation": {
-				"close": true
-			},
-			"problemMatcher": [],
-			"detail": ""
+			"group": "build"
 		},
 		{
 			"type": "cmake",
 			"label": "CMake: Configure",
 			"command": "configure",
-			"group": "build",
-			"presentation": {
-				"close": true
-			},
-			"problemMatcher": [],
-			"detail": ""
+			"group": "build"
 		}
 	]
 }

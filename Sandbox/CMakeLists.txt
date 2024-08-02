@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.22)
 project(Sandbox)
 
+set_output_directories(DEBUG Debug)
+set_output_directories(RELEASE Release)
+set_output_directories(RELWITHDEBINFO RelWithDebInfo)
+set_output_directories(MINSIZEREL MinSizeRel)
+
 set(ENGINE_DIR ../Engine/)
 
 # Source Files
@@ -66,3 +71,13 @@ message(STATUS "Linking libraries '${LIB_NAMES}' to '${PROJECT_NAME}'")
 target_link_libraries(${PROJECT_NAME} ${LIB_NAMES})
 
 message(STATUS "Creating Project '${PROJECT_NAME}'")
+
+# Copy Engine Library to Output Directory
+add_custom_command(
+    TARGET ${PROJECT_NAME}
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "$<TARGET_FILE:Engine>"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+    COMMENT "Copying Engine library to '${PROJECT_NAME}'"
+)

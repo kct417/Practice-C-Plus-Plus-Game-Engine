@@ -36,15 +36,20 @@ Code adapted from YouTube tutorials by The Cherno and sudocpp:
 
 ### Premake
 
--   Windows `Batch file`
+-   Windows `Batch file Solution`
 
-    1.  Run `GenerateProjects.bat`
+    1.  Run `GenerateSolution.bat`
+    2.  Run `msbuild`
+
+-   Windows `Batch file Makefile`
+
+    1.  Run `GenerateMakefile.bat`
     2.  Run `make`
 
 -   command-line
 
     1.  Run `vendor\bin\Premake\premake5.exe <build type>`
-    2.  Run `make`
+    2.  Run Corresponding command (`msbuild`, `make`, etc.)
 
 #### You may need to rerun commands or reload your window if your system does not recognize newly created files
 

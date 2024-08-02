@@ -1,25 +1,37 @@
+IncludeDir = {}
+IncludeDir["glfw"] = "vendor/glfw/include"
+
+include "vendor/glfw"
+
 project "Engine"
     kind "SharedLib"
     language "C++"
 
-    targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("%{wks.location}/bin-build/" .. outputdir .. "/%{prj.name}")
+    targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{_ACTION}/%{prj.name}")
+    objdir ("%{wks.location}/bin-build/" .. outputdir .. "/%{_ACTION}/%{prj.name}")
 
     pchheader "gepch.h"
-    pchsource "%{wks.location}/%{prj.name}/src/Engine/src/gepch.cpp"
+    pchsource "src/Engine/src/gepch.cpp"
 
     files
     {
-        "%{wks.location}/%{prj.name}/src/**.h",
-        "%{wks.location}/%{prj.name}/src/**.cpp"
+        "src/Engine/include/**.h",
+        "src/Engine/src/**.cpp"
     }
 
     includedirs
     {
-        "%{wks.location}/%{prj.name}/src/Engine/include",
-        "%{wks.location}/%{prj.name}/vendor/spdlog/include"
+        "src/Engine/include",
+        "vendor/spdlog/include",
+        "%{IncludeDir.glfw}"
     }
-    
+
+    links
+    {
+        "GLFW",
+        "opengl32"
+    }
+
     filter "system:windows"
         cppdialect "C++17"
         staticruntime "On"
@@ -31,6 +43,11 @@ project "Engine"
             "GE_BUILD_DLL"
         }
 
+        links
+        {
+            "gdi32"
+        }
+
     filter "configurations:Debug"
         defines "GE_DEBUG"
         symbols "On"
@@ -38,7 +55,9 @@ project "Engine"
     filter "configurations:Release"
         defines "GE_RELEASE"
         optimize "On"
+        symbols "Off"
 
     filter "configurations:Dist"
         defines "GE_DIST"
         optimize "On"
+        symbols "Off"

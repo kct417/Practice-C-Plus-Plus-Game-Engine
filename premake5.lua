@@ -1,4 +1,4 @@
-workspace "Engine"
+workspace "Game-Engine"
     architecture "x86_64"
 
     configurations
@@ -10,9 +10,7 @@ workspace "Engine"
 
     outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-include "Engine/premake5.lua"
-include "Sandbox/premake5.lua"
--- include "Game-2/premake5.lua"
+include "Sandbox"
 
 -- Run `vendor\bin\premake\premake5.exe clean`
 newaction {
@@ -24,6 +22,10 @@ newaction {
         os.execute("rmdir /s /q bin-build")
         os.execute("rmdir /s /q build")
         os.execute("del /s /q Makefile")
+        os.execute("del /s /q *.sln")
+        os.execute("del /s /q *.vcxproj")
+        os.execute("del /s /q *.vcxproj.filters")
+
         print("Done.")
     end
 }

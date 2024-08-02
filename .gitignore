@@ -53,6 +53,11 @@ ipch/
 *.out
 *.app
 
+#MSVC
+*.sln
+*.vcxproj
+*.vcxproj.filters
+
 # CMake
 CMakeLists.txt.user
 CMakeCache.txt

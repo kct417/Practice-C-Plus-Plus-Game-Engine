@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.22)
 # Library Name
 project(Engine)
 
+set_output_directories(DEBUG Debug)
+set_output_directories(RELEASE Release)
+set_output_directories(RELWITHDEBINFO RelWithDebInfo)
+set_output_directories(MINSIZEREL MinSizeRel)
+
 # System : Windows
 if (NOT WIN32)
 
@@ -19,7 +24,7 @@ if(NOT TARGET Engine)
     if (MSVC)
 
         set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
-        set(BUILD_SHARED_LIBS TRUE)
+        # set(BUILD_SHARED_LIBS TRUE)
 
     endif()
 
@@ -28,6 +33,7 @@ if(NOT TARGET Engine)
 
         src/Engine/src/Core/Application.cpp
         src/Engine/src/Core/Log.cpp
+        src/Engine/src/Platform/Windows/WindowsWindow.cpp
 
     )
 
@@ -42,13 +48,16 @@ if(NOT TARGET Engine)
     set(SUB_PROJECTS
 
         vendor/spdlog
+        vendor/glfw
 
     )
 
     # Library Names
     set(LIB_NAMES
 
-        spdlog::spdlog
+        spdlog
+        glfw
+        opengl32
 
     )
 
@@ -70,6 +79,9 @@ if(NOT TARGET Engine)
 
     endif()
 
+    # Enable Assertions
+    target_compile_definitions(${PROJECT_NAME} PRIVATE GE_ENABLE_ASSERTS)
+
     # Include Directories
     message(STATUS "Including directories '${INCLUDE_DIRS}' in '${PROJECT_NAME}'")
     target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIRS})
@@ -83,7 +95,7 @@ if(NOT TARGET Engine)
         if(NOT TARGET ${PROJECT})
 
             message(STATUS "Adding subproject '${PROJECT}' to '${PROJECT_NAME}'")
-            add_subdirectory(${PROJECT} ${PROJECT_NAME})
+            add_subdirectory(${PROJECT} ${PROJECT})
 
         endif()
 

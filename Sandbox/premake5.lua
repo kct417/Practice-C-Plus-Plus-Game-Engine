@@ -1,14 +1,16 @@
+include "Engine"
+
 project "Sandbox"
     kind "ConsoleApp"
     language "C++"
 
-    targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("%{wks.location}/bin-build/" .. outputdir .. "/%{prj.name}")
+    targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{_ACTION}/%{prj.name}")
+    objdir ("%{wks.location}/bin-build/" .. outputdir .. "/%{_ACTION}/%{prj.name}")
 
     files
     {
-        "%{wks.location}/%{prj.name}/include/**.h",
-        "%{wks.location}/%{prj.name}/src/**.cpp"
+        "include/**.h",
+        "src/**.cpp"
     }
 
     includedirs
@@ -34,7 +36,7 @@ project "Sandbox"
 
         postbuildcommands
         {
-            "{COPYFILE} %{wks.location}/bin/" .. outputdir .. "/Engine/*.dll %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"
+            '{COPYFILE} "%{wks.location}/bin/' .. outputdir .. '/%{_ACTION}/Engine/Engine.dll" "%{wks.location}/bin/' .. outputdir .. '/%{_ACTION}/%{prj.name}"'
         }
 
     filter "configurations:Debug"
@@ -44,7 +46,9 @@ project "Sandbox"
     filter "configurations:Release"
         defines "GE_RELEASE"
         optimize "On"
+        symbols "Off"
 
     filter "configurations:Dist"
         defines "GE_DIST"
         optimize "On"
+        symbols "Off"

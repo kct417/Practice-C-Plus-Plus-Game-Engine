@@ -16,14 +16,19 @@ if (NOT CMAKE_BUILD_TYPE)
 
 endif()
 
-
 # Set Output Directories
-set(FULL_OUTPUT_DIR "${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}-${CMAKE_SYSTEM_NAME}-${OS_BITNESS}")
-message(STATUS "Output Directory '${FULL_OUTPUT_DIR}'")
+macro(set_output_directories BUILD_TYPE FOLDER_NAME)
+    set(OUTPUT_DIR "${CMAKE_SOURCE_DIR}/bin/${FOLDER_NAME}-${CMAKE_SYSTEM_NAME}-${OS_BITNESS}/${CMAKE_CXX_COMPILER_ID}")
+    message(STATUS "Setting output directory for ${BUILD_TYPE} to ${OUTPUT_DIR}")
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${BUILD_TYPE} "${OUTPUT_DIR}/${PROJECT_NAME}/lib")
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${BUILD_TYPE} "${OUTPUT_DIR}/${PROJECT_NAME}")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${BUILD_TYPE} "${OUTPUT_DIR}/${PROJECT_NAME}")
+endmacro()
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${FULL_OUTPUT_DIR}/static-libraries")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${FULL_OUTPUT_DIR}")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${FULL_OUTPUT_DIR}")
+set_output_directories(DEBUG Debug)
+set_output_directories(RELEASE Release)
+set_output_directories(RELWITHDEBINFO RelWithDebInfo)
+set_output_directories(MINSIZEREL MinSizeRel)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -40,4 +45,3 @@ add_compile_options(
 
 # Compile Projects
 add_subdirectory(Sandbox)
-# add_subdirectory(Game-2)
